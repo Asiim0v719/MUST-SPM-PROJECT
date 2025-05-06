@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Motor
   - Item
+  - UI
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Motor
   - Map
   - Player
-  - 
+  - Bullet
   - 
   - 
   - 

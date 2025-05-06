@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d823113d9f6449a448be2e9708894f31, type: 3}
+  m_Name: BottleCap
+  m_EditorClassIdentifier: 
+  itemName: BottleCap
+  itemImage: {fileID: -1389268597, guid: 6aa146f53b3dd4640a44a4a553d3674c, type: 3}
+  maxStackSize: 99
+  heldAmount: 0
+  itemType: 4
+  itemInfo: Atomic War disabled human industry.

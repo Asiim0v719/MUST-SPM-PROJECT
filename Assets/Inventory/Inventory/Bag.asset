@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Bag
   m_EditorClassIdentifier: 
   itemList: []
-  instance: {fileID: 0}
+  slotIndex: 7
