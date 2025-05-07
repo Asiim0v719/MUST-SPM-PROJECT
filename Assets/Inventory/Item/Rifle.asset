@@ -21,4 +21,4 @@ MonoBehaviour:
   ac: {fileID: 9100000, guid: 2814f8319b973a6489d7da76b7bdc8d0, type: 2}
   firingRatePerSec: 8
   bullet: {fileID: 7720518415878414325, guid: 43e6006cf9eda2b418b47419aa91f9af, type: 3}
-  isEquipped: 1
+  isEquipped: 0

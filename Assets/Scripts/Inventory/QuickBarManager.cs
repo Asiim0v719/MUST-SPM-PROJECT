@@ -14,12 +14,17 @@ public class QuickBarManager : MonoBehaviour
     public GameObject slotGridQuickBar;
     public Slot slotPrefabQuickBar;
 
+    public void SubscribeToInventoryChanges(Inventory inventory)
+    {
+        inventory.OnInventoryChanged += UpdateQuickBarUI;  // 订阅事件
+        inventory.OnInventoryChanged += this.inventory.UpdateList;
+    }
     
-    
-    private int selectedIndex = -1; // 当前选中的物品索引
+    // private int selectedIndex = -1; // 当前选中的物品索引
 
     private void Awake()
     {
+        UpdateQuickBarUI();
         if (instance != null)
             Destroy(this);
         instance = this;
@@ -27,12 +32,15 @@ public class QuickBarManager : MonoBehaviour
     
     void Start()
     {
+        SubscribeToInventoryChanges(inventory);
+        UpdateQuickBarUI();
     }
     
     void Update()
     {
-        
-        UpdateQuickBarUI();
+        inventory.UpdateList();
+        Vector3 mousePosition = Input.mousePosition;
+        // Debug.Log($"鼠标世界位置: {mousePosition}");
         // 检查暂停状态
         if (Time.timeScale == 0) return;
 
@@ -46,19 +54,20 @@ public class QuickBarManager : MonoBehaviour
                 break; // 找到按下的按键后退出循环
             }
         }
+        
     }
     
     
     
     public void UpdateQuickBarUI()
     {
-        Debug.Log("Update QuickBar UI");
+        // Debug.Log("Update QuickBar UI");
         foreach (Transform child in slotGridQuickBar.transform)
         {
             Destroy(child.gameObject);
         }
         
-        for (int i = 0; i < Math.Min(8, inventory.itemList.Count); i++)
+        for (int i = 0; i < Math.Min(9, inventory.itemList.Count); i++)
         {
             Item item = inventory.itemList[i];
             
@@ -66,9 +75,12 @@ public class QuickBarManager : MonoBehaviour
             newSlot.transform.SetParent(slotGridQuickBar.transform, false); // 设置父物体，保持本地坐标
             
             newSlot.slotItem = item;
+            newSlot.index = i;
             newSlot.slotImage.sprite = item.itemImage; // 假设 Item 有 icon 字段
-            newSlot.slotNum.text = item.amount.ToString();
+            newSlot.slotNum.text = item.heldAmount.ToString();
         }
+
+
     }
     
     

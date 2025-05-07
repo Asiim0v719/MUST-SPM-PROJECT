@@ -17,7 +17,7 @@ public class InventoryManager : MonoBehaviour
     
     public GameObject confirmPanel; 
     public Text confirmText;       
-    public Button confirmButton;
+    // public Button confirmButton;
 
     
     
@@ -38,6 +38,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
+        
     }
 
     public static void UpdateItemInfo(string itemDescription)
@@ -47,7 +48,7 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateBagUI()
     {
-        Debug.Log("Update Bag UI");
+        // Debug.Log("Update Bag UI");
         foreach (Transform child in slotGrid.transform)
         {
             Destroy(child.gameObject);
@@ -64,8 +65,9 @@ public class InventoryManager : MonoBehaviour
 
             // 设置槽的内容
             newSlot.slotItem = item;
+            newSlot.index = i;
             newSlot.slotImage.sprite = item.itemImage; // 假设 Item 有 icon 字段
-            newSlot.slotNum.text = item.amount.ToString();
+            newSlot.slotNum.text = item.heldAmount.ToString();
 
             // 添加点击事件（可选）
             Button slotButton = newSlot.GetComponent<Button>();
@@ -80,7 +82,7 @@ public class InventoryManager : MonoBehaviour
     
     void OnSlotClick(int index)
     {
-        Debug.Log($"点击槽 {index}");
+        // Debug.Log($"点击槽 {index}");
         Item item = inventory.itemList[index];
         switch (item.itemType)
         {
@@ -93,14 +95,24 @@ public class InventoryManager : MonoBehaviour
                 selectedIndex = index;
                 confirmText.text = $"是否使用 {item.itemName}？";
                 confirmPanel.SetActive(true);
-                confirmButton.onClick.RemoveAllListeners();
-                confirmButton.onClick.AddListener(() => ConfirmUse());
+                // confirmButton.onClick.RemoveAllListeners();
+                // confirmButton.onClick.AddListener(() => ConfirmUse());
                 
                 UpdateBagUI();
 
                 break;
 
             case ItemType.Material:
+                inventory.UseItem(index);
+                UpdateBagUI();
+                break;
+
+            case ItemType.Medic:
+                inventory.UseItem(index);
+                UpdateBagUI();
+                break;
+
+            case ItemType.Currency:
                 inventory.UseItem(index);
                 UpdateBagUI();
                 break;
@@ -116,4 +128,6 @@ public class InventoryManager : MonoBehaviour
         }
         confirmPanel.SetActive(false); // 关闭确认框
     }
+    
+    
 }

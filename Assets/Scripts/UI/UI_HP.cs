@@ -22,8 +22,8 @@ public class UI_HP : MonoBehaviour
 
     private void Update()
     {
-        slider.value = stats.currentHealth;
-        hp.text = stats.currentHealth + "/" + stats.maxHealth.GetValue();
+        slider.value = stats.currentHealth.GetValue();
+        hp.text = stats.currentHealth.GetValue() + "/" + stats.maxHealth.GetValue();
 
     }
 
